@@ -12,7 +12,7 @@ WORKDIR ${APP_DIR}
 
 # Copy requirements and install
 COPY requirements.txt ./
-RUN uv pip sync requirements.txt --system
+RUN uv pip install -r requirements.txt --system
 
 # Copy project files
 COPY . .
