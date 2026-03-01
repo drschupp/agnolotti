@@ -1,6 +1,7 @@
 agno[openai,os]>=2.5.0
-duckduckgo-search
+ddgs
 fastapi[standard]>=0.115.0
+uvicorn[standard]>=0.34.0
 python-dotenv>=1.0.0
 psycopg[binary]>=3.1.0
 sqlalchemy>=2.0.0

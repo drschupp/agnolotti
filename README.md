@@ -13,13 +13,17 @@ cp .env.example .env
 docker compose up --build
 ```
 
-The API will be available at http://localhost:8000. Test it at http://localhost:8000/docs.
+Services are available via Traefik reverse proxy:
+
+- **API:** http://api.localhost (Swagger docs at http://api.localhost/docs)
+- **Dashboard:** http://dash.localhost (Agno Agent UI)
+- **Traefik Dashboard:** http://localhost:8080
 
 ### Connect to AgentOS UI
 
 1. Open [os.agno.com](https://os.agno.com) and sign in.
 2. Click "Add new OS" in the top navigation.
-3. Select "Local" and enter `http://localhost:8000` as the endpoint.
+3. Select "Local" and enter `http://api.localhost` as the endpoint.
 
 ## Local Development
 
@@ -68,7 +72,7 @@ agnolotti/
 ├── agents/
 │   └── assistant.py      # Example agent (Claude + DuckDuckGo)
 ├── db/
-│   ├── session.py         # Agno PgDb factory
+│   ├── session.py         # Agno PostgresDb factory
 │   └── url.py             # DB URL from env vars
 ├── scripts/
 │   └── entrypoint.sh      # Docker entrypoint
@@ -77,8 +81,9 @@ agnolotti/
 ├── .do/
 │   └── app.yaml           # DigitalOcean App Platform spec
 ├── app.py                 # AgentOS FastAPI application
-├── compose.yaml           # Docker Compose for local dev
+├── compose.yaml           # Docker Compose (API, dashboard, pgvector, Traefik)
 ├── Dockerfile
+├── Dockerfile.dashboard   # Dashboard (Agno Agent UI) build
 ├── pyproject.toml
 └── requirements.txt
 ```
