@@ -1,7 +1,7 @@
 """Agnolotti assistant agent using Claude Sonnet."""
 
 from agno.agent import Agent
-from agno.models.anthropic import Claude
+from agno.models.openai import OpenAIChat
 from agno.tools.duckduckgo import DuckDuckGoTools
 
 from db.session import get_agent_db
@@ -9,7 +9,7 @@ from db.session import get_agent_db
 assistant = Agent(
     id="agnolotti-assistant",
     name="Agnolotti Assistant",
-    model=Claude(id="claude-sonnet-4-20250514"),
+    model=OpenAIChat(id="gpt-4o"),
     db=get_agent_db(),
     tools=[DuckDuckGoTools()],
     description="You are Agnolotti, a helpful AI assistant powered by Claude Sonnet.",

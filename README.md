@@ -1,6 +1,6 @@
 # Agnolotti
 
-Agentic AI project built with [Agno](https://docs.agno.com) and Claude Sonnet, served via AgentOS.
+Agentic AI project built with [Agno](https://docs.agno.com) and OpenAI, served via AgentOS.
 
 ## Quick Start (Docker)
 

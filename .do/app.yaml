@@ -14,7 +14,7 @@ services:
     routes:
       - path: /
     envs:
-      - key: ANTHROPIC_API_KEY
+      - key: OPENAI_API_KEY
         scope: RUN_TIME
         type: SECRET
       - key: AGNO_TELEMETRY

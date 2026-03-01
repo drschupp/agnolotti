@@ -1,4 +1,4 @@
-agno[anthropic,os]>=2.5.0
+agno[openai,os]>=2.5.0
 duckduckgo-search
 fastapi[standard]>=0.115.0
 python-dotenv>=1.0.0
