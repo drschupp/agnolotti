@@ -1,0 +1,29 @@
+.DS_Store
+.git
+
+# Cache
+.mypy_cache
+*__pycache__*
+*.egg-info
+*.pyc
+*.pytest_cache
+*.ruff_cache
+*.cache*
+
+# IDE
+.idea
+.vscode
+
+# Env files
+.env
+.envrc
+
+# Storage
+/storage
+
+# Dist
+dist
+
+# Virtual environments
+.venv*
+venv*

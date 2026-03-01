@@ -1,0 +1,7 @@
+agno[anthropic,os]>=2.5.0
+duckduckgo-search
+fastapi[standard]>=0.115.0
+python-dotenv>=1.0.0
+psycopg[binary]>=3.1.0
+sqlalchemy>=2.0.0
+pgvector>=0.3.0
