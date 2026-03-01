@@ -54,16 +54,47 @@ uv run ruff check .
 
 ## Deploy to DigitalOcean
 
-This project includes a DigitalOcean App Platform spec in `.do/app.yaml`.
+The project deploys to [DigitalOcean App Platform](https://docs.digitalocean.com/products/app-platform/) using the spec in `.do/app.yaml`. It provisions:
+
+- **API** (`professional-xs`) at `/api` — path prefix is trimmed, so the app receives requests at `/`
+- **Dashboard** (`basic-xs`) at `/` — Agno Agent UI
+- **PostgreSQL** (`db-s-dev-database`) — managed database
+
+### Automated deploy (recommended)
+
+Requires the [doctl CLI](https://docs.digitalocean.com/reference/doctl/how-to/install/) authenticated via `doctl auth init`.
+
+**Bash** (Linux/macOS/WSL):
+
+```bash
+./scripts/do-deploy.sh              # deploy and wait
+./scripts/do-deploy.sh --no-wait    # deploy without waiting
+./scripts/do-logs.sh                # API logs (default)
+./scripts/do-logs.sh dashboard      # dashboard logs
+./scripts/do-teardown.sh            # tear down app + database
+```
+
+**PowerShell** (Windows):
+
+```powershell
+.\scripts\do-deploy.ps1              # deploy and wait
+.\scripts\do-deploy.ps1 -NoWait      # deploy without waiting
+.\scripts\do-logs.ps1                # API logs (default)
+.\scripts\do-logs.ps1 -Component dashboard
+.\scripts\do-teardown.ps1            # tear down app + database
+```
+
+After the first deploy, set the `OPENAI_API_KEY` secret in the App Platform console.
+
+### Manual deploy
 
 1. Push this repo to GitHub.
 2. In the [DigitalOcean App Platform](https://cloud.digitalocean.com/apps), click **Create App**.
-3. Select this GitHub repo.
-4. DigitalOcean will detect `.do/app.yaml` and configure the app automatically.
-5. Set the `ANTHROPIC_API_KEY` secret in the app settings.
-6. Deploy.
+3. Select this GitHub repo — DO will detect `.do/app.yaml` automatically.
+4. Set the `OPENAI_API_KEY` secret in the app settings.
+5. Deploy.
 
-The spec provisions a `professional-xs` instance and a dev-size managed PostgreSQL database.
+Once deployed, open the Dashboard in your browser and configure it to connect to `https://<your-app>.ondigitalocean.app/api`.
 
 ## Project Structure
 
@@ -75,7 +106,13 @@ agnolotti/
 │   ├── session.py         # Agno PostgresDb factory
 │   └── url.py             # DB URL from env vars
 ├── scripts/
-│   └── entrypoint.sh      # Docker entrypoint
+│   ├── entrypoint.sh      # Docker entrypoint
+│   ├── do-deploy.sh       # Deploy to DO App Platform (bash)
+│   ├── do-deploy.ps1      # Deploy to DO App Platform (PowerShell)
+│   ├── do-teardown.sh     # Tear down the DO app (bash)
+│   ├── do-teardown.ps1    # Tear down the DO app (PowerShell)
+│   ├── do-logs.sh         # Stream DO app logs (bash)
+│   └── do-logs.ps1        # Stream DO app logs (PowerShell)
 ├── tests/
 │   └── test_agent.py
 ├── .do/
